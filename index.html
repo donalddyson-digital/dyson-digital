@@ -482,7 +482,7 @@
     <li><a href="#payment">Pricing</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Get a Free Quote</a>
+  <a href="#get-quote" class="nav-cta">Get a Free Quote</a>
 </nav>
 
 <section class="hero">
@@ -916,10 +916,8 @@
   </div>
   <div class="footer-copy">© 2026 Dyson Digital · Donald Dyson · <a href="mailto:donalddyson@dysondigital.com" style="color:rgba(255,255,255,0.45);text-decoration:none;">donalddyson@dysondigital.com</a> · Royal Oak, MI</div>
 </footer>
-
 <script>
 (function(){
-  // Smooth scroll with dynamic nav offset
   document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     a.addEventListener('click', function(e) {
       var id = a.getAttribute('href').slice(1);
@@ -932,8 +930,6 @@
       window.scrollTo({ top: top, behavior: 'smooth' });
     });
   });
-
-  // Formspree contact form
   var form = document.getElementById('contactForm');
   if (form) {
     form.addEventListener('submit', function(e) {

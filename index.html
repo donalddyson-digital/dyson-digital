@@ -914,53 +914,36 @@
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </div>
-  <div class="footer-copy">© 2026 Dyson Digital · Donald Dyson · <a href="mailto:donalddyson@dysondigital.com" style="color:rgba(255,255,255,0.45);text-decoration:none;">donalddyson@dysondigital.com</a> · Royal Oak, MI</div>
+  <div class="footer-copy">&#169; 2026 Dyson Digital &middot; Donald Dyson &middot; <a href="mailto:donalddyson@dysondigital.com" style="color:rgba(255,255,255,0.45);text-decoration:none;">donalddyson@dysondigital.com</a> &middot; Royal Oak, MI</div>
 </footer>
 <script>
 (function(){
-  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-    a.addEventListener('click', function(e) {
-      var id = a.getAttribute('href').slice(1);
-      var target = document.getElementById(id);
-      if (!target) return;
+  // Smooth scroll - all anchor buttons land at target minus nav height
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href').slice(1);
+      var el=document.getElementById(id);
+      if(!el)return;
       e.preventDefault();
-      var nav = document.querySelector('nav');
-      var navH = nav ? nav.getBoundingClientRect().height : 68;
-      var top = target.getBoundingClientRect().top + window.pageYOffset - navH - 12;
-      window.scrollTo({ top: top, behavior: 'smooth' });
+      var nav=document.querySelector('nav');
+      var nh=nav?nav.getBoundingClientRect().height:68;
+      window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-nh-12,behavior:'smooth'});
     });
   });
-  var form = document.getElementById('contactForm');
-  if (form) {
-    form.addEventListener('submit', function(e) {
+  // Formspree form handler
+  var form=document.getElementById('contactForm');
+  if(form){
+    form.addEventListener('submit',function(e){
       e.preventDefault();
-      var btn = document.getElementById('submitBtn');
-      var ok = document.getElementById('formSuccess');
-      var err = document.getElementById('formError');
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
-      fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      }).then(function(r) {
-        if (r.ok) {
-          ok.style.display = 'block';
-          err.style.display = 'none';
-          form.reset();
-          btn.textContent = '✅ Message Sent!';
-        } else {
-          err.style.display = 'block';
-          ok.style.display = 'none';
-          btn.textContent = 'Send My Free Quote Request →';
-          btn.disabled = false;
-        }
-      }).catch(function() {
-        err.style.display = 'block';
-        ok.style.display = 'none';
-        btn.textContent = 'Send My Free Quote Request →';
-        btn.disabled = false;
-      });
+      var btn=document.getElementById('submitBtn');
+      var ok=document.getElementById('formSuccess');
+      var err=document.getElementById('formError');
+      btn.textContent='Sending...';btn.disabled=true;
+      fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+      .then(function(r){
+        if(r.ok){ok.style.display='block';err.style.display='none';form.reset();btn.textContent='Message Sent!';}
+        else{err.style.display='block';ok.style.display='none';btn.textContent='Send My Free Quote Request';btn.disabled=false;}
+      }).catch(function(){err.style.display='block';ok.style.display='none';btn.textContent='Send My Free Quote Request';btn.disabled=false;});
     });
   }
 })();

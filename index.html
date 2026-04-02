@@ -798,7 +798,7 @@
         <div class="c-detail"><span class="c-icon">👤</span><div><div class="c-label">Your Contact</div><div class="c-val">Donald Dyson · Dyson Digital</div></div></div>
         <div class="c-detail"><span class="c-icon">📍</span><div><div class="c-label">Location</div><div class="c-val">Royal Oak, MI · Serving Metro Detroit</div></div></div>
         <div class="c-detail"><span class="c-icon">💬</span><div><div class="c-label">How We Meet</div><div class="c-val">In person in Royal Oak · Zoom call · Phone — whatever works best for you</div></div></div>
-        <div class="c-detail"><span class="c-icon">📧</span><div><div class="c-label">Email</div><div class="c-val"><a href="mailto:donalddyson@dysondigital.com" style="color:var(--blue);text-decoration:none;">donalddyson@dysondigital.com</a></div></div></div>
+        <div class="c-detail"><span class="c-icon">📧</span><div><div class="c-label">Email</div><div class="c-val"><a href="mailto:donalddyson@dysondigital.com" style="color:var(--blue);text-decoration:none;word-break:break-all;">donalddyson@dysondigital.com</a></div></div></div>
         <div class="c-detail"><span class="c-icon">⚡</span><div><div class="c-label">Response Time</div><div class="c-val">Within 24 hours · Usually same day</div></div></div>
       </div>
     </div>
@@ -806,20 +806,28 @@
         <strong style="display:block;margin-bottom:0.3rem;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;">Our Guarantee</strong>
         In the rare event that I am unable to complete your project due to unforeseen personal circumstances beyond my control, a full refund of all payments made will be issued within 7 business days. Your investment is always protected.
       </div>
-      <div class="contact-form">
-      <div class="form-title">Get a Free Quote</div>
-      <div class="form-sub">No commitment required. Just tell me a bit about your project.</div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Jane Smith" /></div>
-        <div class="form-group"><label class="form-label">Business Name</label><input type="text" class="form-input" placeholder="Smith's Bakery" /></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="jane@yourbusiness.com" /></div>
-        <div class="form-group"><label class="form-label">Phone (optional)</label><input type="tel" class="form-input" placeholder="(248) XXX-XXXX" /></div>
-      </div>
-      <div class="form-group"><label class="form-label">Tell me about your project</label><textarea class="form-textarea" placeholder="What kind of business do you have? Do you have a website already? What do you want your new site to do?"></textarea></div>
-      <button class="form-submit" id="submitBtn">Send My Free Quote Request →</button>
-    </div>
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/mvzvblry" method="POST">
+        <div class="form-title">Get a Free Quote</div>
+        <div class="form-sub">No commitment required. Just tell me a bit about your project.</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Your Name</label><input type="text" name="name" class="form-input" placeholder="Jane Smith" required /></div>
+          <div class="form-group"><label class="form-label">Business Name</label><input type="text" name="business" class="form-input" placeholder="Smith's Bakery" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Email</label><input type="email" name="email" class="form-input" placeholder="jane@yourbusiness.com" required /></div>
+          <div class="form-group"><label class="form-label">Phone (optional)</label><input type="tel" name="phone" class="form-input" placeholder="(248) XXX-XXXX" /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Tell me about your project</label><textarea name="message" class="form-textarea" placeholder="What kind of business do you have? Do you have a website already? What do you want your new site to do?" required></textarea></div>
+        <input type="hidden" name="_subject" value="New quote request from dysondigital.com" />
+        <input type="hidden" name="_next" value="https://dysondigital.com/#contact" />
+        <div id="formSuccess" style="display:none;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem;color:#16a34a;font-size:0.88rem;font-weight:600;">
+          ✅ Message sent! I'll be in touch within 24 hours.
+        </div>
+        <div id="formError" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem;color:#dc2626;font-size:0.88rem;">
+          Something went wrong. Please email me directly at <a href="mailto:donalddyson@dysondigital.com" style="color:var(--blue);text-decoration:none;">donalddyson@dysondigital.com</a>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">Send My Free Quote Request →</button>
+      </form>
   </div>
 </section>
 
@@ -906,4 +914,41 @@
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </div>
-  <div class="footer-copy">© 2026 Dyson Digital · Donald Dyson · <a href="/
+  <div class="footer-copy">© 2026 Dyson Digital · Donald Dyson · <a href="mailto:donalddyson@dysondigital.com" style="color:var(--blue);text-decoration:none;">donalddyson@dysondigital.com</a> · Royal Oak, MI</div>
+</footer>
+
+<script>
+(function(){
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Contact form with Formspree
+  var form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('submitBtn');
+      var success = document.getElementById('formSuccess');
+      var error = document.getElementById('formError');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(res) {
+        if (res.ok) {
+          success.style.display = 'block';
+          error.style.display = 'none';
+          form.reset();
+          btn.textContent = '✅ Message Sent!';
+        } else {
+          error.style.d

@@ -110,9 +110,9 @@ section{padding:4.5rem 2rem}
 #process .eyebrow::before{background:#60a5fa}
 #process .sec-h{color:#f1f5f9}
 #process .sec-sub{color:#94a3b8;max-width:600px}
-.pay-steps{display:flex;flex-direction:column;max-width:780px}
-.pay-step{display:flex;align-items:flex-start;gap:1.2rem;padding:1.6rem 0;border-bottom:1px solid rgba(255,255,255,0.07)}
-.pay-step:last-child{border-bottom:none}
+.pay-steps{display:flex;flex-direction:column}
+
+
 .step-num{background:rgba(37,99,235,0.22);border:1.5px solid rgba(37,99,235,0.4);color:#60a5fa;font-size:0.79rem;font-weight:700;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .step-body h3{font-size:0.98rem;font-weight:700;margin-bottom:0.28rem;color:#f1f5f9}
 .step-body p{font-size:0.85rem;color:#94a3b8;line-height:1.68}
@@ -287,6 +287,26 @@ footer{background:#0f172a;padding:2.25rem 2rem 1.75rem;text-align:center}
   .pricing-stack .creators-card{grid-column:1/-1;margin-left:0;margin-right:0}
   .pricing-stack .pay-note{grid-column:1/-1;margin-left:0;margin-right:0}
 }
+
+.process-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:start}
+.process-intro{}
+.process-steps-col{}
+@media(max-width:860px){.process-inner{grid-template-columns:1fr;gap:2.5rem}}
+#process .eyebrow{color:#60a5fa}#process .eyebrow::before{background:#60a5fa}
+.process-two-col{display:grid;grid-template-columns:380px 1fr;gap:4rem;align-items:start;max-width:1100px;margin:0 auto}
+.process-intro{}
+.pay-steps{display:grid;grid-template-columns:1fr;gap:0}
+.pay-step{display:flex;align-items:flex-start;gap:1.2rem;padding:1.5rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;margin-bottom:1rem}
+.pay-step:last-child{margin-bottom:0}
+.step-num{background:rgba(37,99,235,0.3);border:1.5px solid rgba(37,99,235,0.5);color:#60a5fa;font-size:0.79rem;font-weight:700;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-body h3{font-size:0.98rem;font-weight:700;margin-bottom:0.28rem;color:#f1f5f9}
+.step-body p{font-size:0.85rem;color:#94a3b8;line-height:1.68}
+@media(max-width:860px){.process-two-col{grid-template-columns:1fr;gap:2rem}}
+.process-inner{display:grid;grid-template-columns:360px 1fr;gap:4rem;align-items:start;max-width:1100px;margin:0 auto}
+.process-intro{}
+@media(max-width:860px){.process-inner{grid-template-columns:1fr;gap:2rem}}
+
+.process-steps-col{display:flex;flex-direction:column;gap:0}
 </style>
 </head>
 <body>
@@ -406,15 +426,41 @@ footer{background:#0f172a;padding:2.25rem 2rem 1.75rem;text-align:center}
 <!-- HOW PAYMENT WORKS -->
 <section id="process">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">How Payment Works</div>
-      <h2 class="sec-h">Simple, secure,<br><em>no surprises.</em></h2>
-      <p class="sec-sub">Every project follows the same straightforward payment structure. No hidden fees, no surprise invoices — just clear terms from day one.</p>
-    </div>
-    <div class="pay-steps">
-      <div class="pay-step"><div class="step-num">01</div><div class="step-body"><h3>50% Deposit to Start</h3><p>Once we agree on scope and price, a 50% deposit secures your spot and kicks off the project. I'll send you a Wave invoice by email — pay securely by card in minutes.</p></div></div>
-      <div class="pay-step"><div class="step-num">02</div><div class="step-body"><h3>Preview &amp; Revisions</h3><p>You receive a preview link to review your site. One round of revisions is included. We make sure everything looks and works exactly how you want it.</p></div></div>
-      <div class="pay-step"><div class="step-num">03</div><div class="step-body"><h3>50% Due at Launch</h3><p>Once you've approved the final site, the remaining 50% is due before we go live. Your site is published and you own everything — domain, code, accounts.</p></div></div>
+    <div class="process-inner">
+      <div class="process-intro">
+        <div class="eyebrow">How Payment Works</div>
+        <h2 class="sec-h" style="color:#f1f5f9">Simple, secure,<br><em>no surprises.</em></h2>
+        <p style="color:#94a3b8;font-size:0.92rem;line-height:1.75;margin-bottom:2rem">Every project follows the same straightforward payment structure. No hidden fees, no surprise invoices — just clear terms from day one.</p>
+        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1.4rem 1.5rem">
+          <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#60a5fa;margin-bottom:0.6rem">Why this matters</div>
+          <p style="font-size:0.85rem;color:#94a3b8;line-height:1.7">Most freelancers ask for payment upfront and disappear. At Dyson Digital, you only pay 50% to start and 50% when you're happy with the result — your investment is always protected.</p>
+        </div>
+      </div>
+      <div class="process-steps-col">
+        <div class="pay-steps">
+          <div class="pay-step">
+            <div class="step-num">01</div>
+            <div class="step-body">
+              <h3>50% Deposit to Start</h3>
+              <p>Once we agree on scope and price, a 50% deposit secures your spot and kicks off the project. I'll send you a Wave invoice by email — pay securely by card in minutes.</p>
+            </div>
+          </div>
+          <div class="pay-step">
+            <div class="step-num">02</div>
+            <div class="step-body">
+              <h3>Preview &amp; Revisions</h3>
+              <p>You receive a preview link to review your site. One round of revisions is included. We make sure everything looks and works exactly how you want it.</p>
+            </div>
+          </div>
+          <div class="pay-step">
+            <div class="step-num">03</div>
+            <div class="step-body">
+              <h3>50% Due at Launch</h3>
+              <p>Once you've approved the final site, the remaining 50% is due before we go live. Your site is published and you own everything — domain, code, accounts.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

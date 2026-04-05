@@ -78,12 +78,28 @@ section{padding:4.5rem 2rem}
 .eyebrow::before{content:'';display:block;width:2rem;height:2px;background:#2563eb;flex-shrink:0}
 .sec-h{font-family:'Playfair Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);font-weight:800;letter-spacing:-0.02em;line-height:1.08;color:#1a2340;margin-bottom:0.75rem}
 .sec-h em{font-style:italic;color:#2563eb}
-.sec-sub{color:#64748b;font-size:0.91rem;max-width:540px;line-height:1.75}
-.sec-head{margin-bottom:2.5rem}
+.sec-head{
+  margin-bottom:2.5rem;
+  text-align:center;
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom:2.75rem
+}
+.sec-sub{color:#64748b;font-size:0.91rem;max-width:540px;line-height:1.75;margin:0 auto}
 
 /* SERVICES */
-#services{background:#f8fafc}
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+#services{background:#f8fafc;padding:4rem 1.25rem}@media(min-width:640px){#services{padding:4.5rem 2rem}}
+.svc-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.1rem;
+  max-width:1100px;
+  margin:0 auto;
+  width:100%
+}
+@media(min-width:600px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.svc-grid{grid-template-columns:repeat(3,1fr)}}
 .svc-card{background:#fff;border:1.5px solid #e8ecf4;border-radius:13px;padding:1.6rem;transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s}
 .svc-card:hover{border-color:#93c5fd;box-shadow:0 4px 20px rgba(37,99,235,0.07);transform:translateY(-2px)}
 .svc-icon{font-size:1.75rem;margin-bottom:0.8rem}
@@ -94,7 +110,15 @@ section{padding:4.5rem 2rem}
 
 /* WORK */
 #work{background:#fff}
-.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.work-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.4rem;
+  max-width:1100px;
+  margin:0 auto
+}
+@media(min-width:600px){.work-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.work-grid{grid-template-columns:repeat(3,1fr)}}
 .work-card{background:#fff;border:1.5px solid #e8ecf4;border-radius:13px;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s}
 .work-card:hover{transform:translateY(-3px);box-shadow:0 8px 26px rgba(0,0,0,0.07)}
 .work-img{width:100%;height:185px;object-fit:contain;display:block;background:#f8fafc;padding:1rem}
@@ -109,7 +133,7 @@ section{padding:4.5rem 2rem}
 #process .eyebrow{color:#60a5fa}
 #process .eyebrow::before{background:#60a5fa}
 #process .sec-h{color:#f1f5f9}
-#process .sec-sub{color:#94a3b8;max-width:600px}
+#process 
 .pay-steps{display:flex;flex-direction:column}
 
 
@@ -118,8 +142,21 @@ section{padding:4.5rem 2rem}
 .step-body p{font-size:0.85rem;color:#94a3b8;line-height:1.68}
 
 /* ABOUT */
-#about{background:#fff;padding:4.5rem 2rem}
-.about-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:380px 1fr;gap:4rem;align-items:start}
+#about{background:#fff;padding:3.5rem 1.25rem}@media(min-width:640px){#about{padding:4.5rem 2rem}}
+.about-grid{
+  max-width:900px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:2rem;
+  align-items:start
+}
+@media(min-width:860px){
+  .about-grid{
+    grid-template-columns:340px 1fr;
+    gap:3.5rem
+  }
+}
 .about-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.85rem,3.5vw,2.75rem);font-weight:800;letter-spacing:-0.02em;line-height:1.08;margin-bottom:1.05rem;color:#1a2340}
 .about-text h2 em{font-style:italic;color:#2563eb}
 .about-text p{color:#475569;font-size:0.91rem;line-height:1.83;margin-bottom:0.88rem}
@@ -133,8 +170,15 @@ section{padding:4.5rem 2rem}
 .feat-card p{font-size:0.77rem;color:#64748b}
 
 /* PRICING */
-#pricing{background:#f0f4ff;padding:4.5rem 2rem}
-.pricing-stack{display:flex;flex-direction:column;gap:1.35rem;max-width:1100px;margin:0 auto}
+#pricing{background:#f0f4ff;padding:3.5rem 1.25rem}@media(min-width:640px){#pricing{padding:4.5rem 2rem}}
+.pricing-stack{
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+  max-width:860px;
+  margin:0 auto;
+  width:100%
+}
 .p-card{background:#fff;border:1.5px solid #e8ecf4;border-radius:15px;padding:1.9rem;transition:box-shadow 0.2s}
 .p-card:hover{box-shadow:0 8px 26px rgba(0,0,0,0.07)}
 .p-card.popular{background:#eef2ff;border-color:#93c5fd;border-width:2px}
@@ -194,7 +238,7 @@ section{padding:4.5rem 2rem}
 
 /* CONTACT */
 #contact{background:#f8fafc;padding:4.5rem 2rem}
-.contact-inner{max-width:1100px;margin:0 auto}
+.contact-inner{max-width:1100px;margin:0 auto;padding:0}
 .contact-inner h2{font-family:'Playfair Display',serif;font-size:clamp(2.1rem,4vw,2.9rem);font-weight:800;letter-spacing:-0.02em;line-height:1.06;margin-bottom:0.48rem;color:#1a2340}
 .contact-inner h2 em{font-style:italic;color:#2563eb}
 .contact-inner>p{color:#64748b;font-size:0.89rem;margin-bottom:1.9rem;line-height:1.68}
@@ -240,7 +284,7 @@ footer{background:#0f172a;padding:2.25rem 2rem 1.75rem;text-align:center}
   .work-grid{grid-template-columns:repeat(2,1fr)}
   
 }
-@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:2rem}.about-grid .photo-col{max-width:360px;margin:0 auto}
+
   
   .about-grid{grid-template-columns:1fr;gap:2.5rem}
   .about-grid .photo-card{max-width:400px;margin:0 auto}
@@ -249,6 +293,15 @@ footer{background:#0f172a;padding:2.25rem 2rem 1.75rem;text-align:center}
 }
 @media(max-width:480px){.nav-mid{display:none}}
 @media(max-width:640px){
+  section,#process,#about,#pricing,#contact{padding:2.75rem 1.1rem}
+  .hero{padding:5rem 1.1rem 2.25rem}
+  .svc-grid,.work-grid{grid-template-columns:1fr}
+  .p-price-big{font-size:2.2rem}
+  .hero h1{font-size:2.4rem}
+  .pricing-stack{max-width:100%}
+  .sec-head{text-align:center}
+  .sec-sub{text-align:center}
+
   nav{padding:0.6rem 1rem}
   .nav-links{display:none}
   .hamburger{display:flex}
@@ -312,6 +365,28 @@ footer{background:#0f172a;padding:2.25rem 2rem 1.75rem;text-align:center}
 .bundle-left{}
 .bundle-right{}
 @media(max-width:860px){.bundle-card-inner{grid-template-columns:1fr;gap:1.5rem}}
+.photo-col{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  max-width:360px;
+  margin:0 auto
+}
+@media(min-width:860px){
+  .photo-col{
+    align-items:flex-start;
+    margin:0;
+    max-width:100%
+  }
+}
+.about-text{
+  text-align:left;
+  max-width:600px;
+  margin:0 auto
+}
+@media(min-width:860px){
+  .about-text{margin:0}
+}
 </style>
 </head>
 <body>

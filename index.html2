@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dyson Digital | Professional Web Design in Royal Oak, MI</title>
+<meta name="description" content="Affordable, high-performance website design for small businesses in Royal Oak and Metro Detroit.">
+<style>
+:root { --primary: #007bff; --dark: #333; --light: #f4f4f4; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; line-height: 1.6; color: var(--dark); }
+
+/* Optimized Header & Nav */
+header { background: #fff; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+nav a { margin-left: 20px; text-decoration: none; color: var(--dark); font-weight: 500; font-size: 0.9rem; }
+nav a:hover { color: var(--primary); }
+
+/* Compact Hero Section */
+.hero { background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); padding: 80px 5%; text-align: center; }
+.hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+
+/* Grid Sections */
+.container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+.card { background: var(--light); padding: 25px; border-radius: 8px; transition: 0.3s; }
+.card:hover { transform: translateY(-5px); }
+
+/* Professional Buttons */
+.btn { display: inline-block; padding: 10px 25px; background: var(--primary); color: #fff; text-decoration: none; border-radius: 5px; margin-top: 15px; }
+.btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+
+footer { text-align: center; padding: 40px; background: var(--dark); color: #fff; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo"><strong>DYSON</strong> DIGITAL</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="services.html">Services</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</nav>
+</header>
+
+<section class="hero">
+<h1>Websites Built for Royal Oak Small Businesses</h1>
+<p>Modern, responsive, and affordable digital solutions from Dyson Digital.</p>
+<a href="contact.html" class="btn">Get a Free Quote</a>
+</section>
+
+<div class="container">
+<h2 style="text-align:center">Our Services</h2>
+<div class="grid">
+<div class="card">
+<h3>Starter Package</h3>
+<p>Up to 5 pages. Perfect for personal brands and local shops looking to establish a presence.</p>
+<strong>$400</strong><br>
+<a href="services.html" class="btn btn-outline">View Details</a>
+</div>
+<div class="card">
+<h3>Full Custom</h3>
+<p>Up to 8 pages. Advanced SEO, custom graphics, and integrated contact forms.</p>
+<strong>$750</strong><br>
+<a href="services.html" class="btn btn-outline">View Details</a>
+</div>
+<div class="card">
+<h3>E-Commerce</h3>
+<p>A full online store to sell your products 24/7 with secure payment processing.</p>
+<strong>$1,200+</strong><br>
+<a href="services.html" class="btn btn-outline">View Details</a>
+</div>
+</div>
+</div>
+
+<section style="background: var(--light); padding: 60px 0;">
+<div class="container">
+<h2>About Dyson Digital</h2>
+<p>Founded in Royal Oak, Michigan, Dyson Digital was born out of a passion for helping Metro Detroit businesses thrive online. We believe every local business deserves a high-performance website without the agency price tag.</p>
+<a href="about.html" class="btn btn-outline">Read Our Story</a>
+</div>
+</section>
+
+<footer>
+<p>&copy; 2026 Dyson Digital. Designed in Royal Oak, MI.</p>
+</footer>
+
+</body>
+</html>

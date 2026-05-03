@@ -1655,59 +1655,76 @@ footer{
 }
 
 /* =========================================================
-   HERO VIDEO BACKGROUND (homepage upgrade)
-   Layers under .hero-inner. Falls back to existing radial
-   gradients if video fails or autoplay is blocked.
+   HERO VIDEO BACKGROUND (homepage)
+   - DESKTOP: video sits behind text with LIGHT overlay (≤0.40)
+             + brightness 0.95 so footage stays visible
+   - MOBILE:  video stacks BELOW text (own block, ~240px tall)
+             Text sits on solid dark bg, no overlay needed
+   - Reduced-motion users get a static gradient (no video)
    ========================================================= */
 .hero{
   position:relative;
   overflow:hidden;
+  isolation:isolate;
 }
+
+/* ---- Video element ---- */
 .hero-video{
   position:absolute;
-  inset:0;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
   width:100%;
   height:100%;
+  min-width:100%;
+  min-height:100%;
   object-fit:cover;
   object-position:center;
   z-index:0;
   pointer-events:none;
   border:0;
   outline:none;
+  filter:brightness(0.95);
+  will-change:transform;
 }
-.hero-overlay{
+
+/* ---- Light overlay (desktop). Caps at 0.40 alpha ---- */
+.hero::before{
+  content:"";
   position:absolute;
   inset:0;
   z-index:1;
-  background:
-    linear-gradient(180deg,rgba(10,10,15,0.55) 0%,rgba(10,10,15,0.50) 55%,rgba(10,10,15,0.78) 100%),
-    radial-gradient(circle at 20% 30%,rgba(79,142,247,0.18),transparent 50%),
-    radial-gradient(circle at 80% 70%,rgba(124,92,252,0.14),transparent 55%);
+  background:linear-gradient(180deg,
+    rgba(0,0,0,0.30) 0%,
+    rgba(0,0,0,0.28) 55%,
+    rgba(10,10,15,0.40) 100%);
   pointer-events:none;
 }
+
 .hero-inner{
   position:relative;
   z-index:2;
 }
 
-/* Hero text contrast lift on top of video */
+/* ---- Hero text contrast (text-shadow does the heavy lifting,
+        not a heavy overlay) ---- */
 .hero h1{
   color:#fff;
-  text-shadow:0 2px 18px rgba(0,0,0,0.55);
+  text-shadow:0 2px 22px rgba(0,0,0,0.65),0 1px 2px rgba(0,0,0,0.5);
 }
 .hero-desc{
-  color:rgba(255,255,255,0.92);
-  text-shadow:0 1px 12px rgba(0,0,0,0.45);
+  color:rgba(255,255,255,0.95);
+  text-shadow:0 1px 14px rgba(0,0,0,0.55);
 }
 .hero-tag{
-  background:rgba(0,0,0,0.35);
-  border-color:rgba(255,255,255,0.18);
-  color:rgba(255,255,255,0.85);
-  backdrop-filter:blur(6px);
-  -webkit-backdrop-filter:blur(6px);
+  background:rgba(0,0,0,0.40);
+  border-color:rgba(255,255,255,0.20);
+  color:rgba(255,255,255,0.92);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
 }
 
-/* Trust / location line under the paragraph */
+/* Trust / location pill */
 .hero-trust{
   display:inline-flex;
   align-items:center;
@@ -1715,8 +1732,8 @@ footer{
   padding:0.5rem 1rem;
   margin:0 auto 2rem;
   border-radius:999px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(0,0,0,0.40);
+  border:1px solid rgba(255,255,255,0.18);
   color:#fff;
   font-size:0.82rem;
   font-weight:500;
@@ -1725,27 +1742,98 @@ footer{
   -webkit-backdrop-filter:blur(8px);
 }
 
-/* Hero stats card sits more cleanly over video */
+/* Hero stats card readable over video */
 .hero-stats{
   background:rgba(10,10,15,0.55);
-  border-color:rgba(255,255,255,0.10);
+  border-color:rgba(255,255,255,0.12);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
 }
 
-/* Performance + accessibility:
-   pause animations, respect reduced-motion, hide video on small phones to save data */
+/* ---- Reduced-motion: hide video, gradient fallback ---- */
 @media(prefers-reduced-motion:reduce){
   .hero-video{display:none;}
-}
-@media(max-width:480px){
-  .hero-video{display:none;}      /* save mobile data + battery */
-  .hero-overlay{
+  .hero::before{
     background:
       linear-gradient(180deg,rgba(10,10,15,0.85),rgba(10,10,15,0.95)),
-      radial-gradient(circle at 30% 30%,rgba(79,142,247,0.22),transparent 55%),
-      radial-gradient(circle at 70% 70%,rgba(124,92,252,0.18),transparent 55%);
+      radial-gradient(circle at 30% 30%,rgba(79,142,247,0.18),transparent 55%),
+      radial-gradient(circle at 70% 70%,rgba(124,92,252,0.14),transparent 55%);
   }
-  .hero{min-height:78vh;}
-  .hero-trust{margin-bottom:1.5rem;font-size:0.78rem;}
 }
+
+/* ---- Tablet (769–1024px): keep behind text, slightly tighter overlay ---- */
+@media(min-width:769px) and (max-width:1024px){
+  .hero-video{filter:brightness(0.92);}
+  .hero::before{
+    background:linear-gradient(180deg,
+      rgba(0,0,0,0.32) 0%,
+      rgba(0,0,0,0.30) 55%,
+      rgba(10,10,15,0.42) 100%);
+  }
+}
+
+/* =========================================================
+   MOBILE (≤768px): STACKED LAYOUT
+   - Section becomes a normal vertical flex column
+   - Text content sits on solid dark surface
+   - Video moves out from "behind" and becomes its own
+     block ~260px tall, slotted below the inner content
+   - Light brightness reduction only — NO heavy overlay
+   ========================================================= */
+@media(max-width:768px){
+  .hero{
+    min-height:auto;          /* let it size to content */
+    padding:0;
+    display:block;
+    background:var(--dark);   /* solid behind text, max readability */
+  }
+  .hero::before{display:none;} /* no overlay needed when stacked */
+
+  .hero-inner{
+    padding:3rem 5% 2rem;
+    text-align:center;
+  }
+
+  .hero-video{
+    position:static;          /* take it out of absolute positioning */
+    transform:none;
+    top:auto;left:auto;
+    width:100%;
+    height:260px;
+    min-width:0;
+    min-height:0;
+    display:block;
+    filter:brightness(0.85);  /* slight dim only — video stays visible */
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+
+  /* Text sizing on mobile */
+  .hero h1{
+    font-size:clamp(2rem,7vw,2.6rem);
+    text-shadow:none;         /* solid bg, shadow not needed */
+  }
+  .hero-desc{
+    font-size:1rem;
+    line-height:1.65;
+    margin-bottom:1.5rem;
+    text-shadow:none;
+  }
+  .hero-tag{font-size:0.68rem;}
+  .hero-trust{margin-bottom:1.5rem;font-size:0.78rem;}
+  .hero-ctas{margin-bottom:2.25rem;}
+}
+
+/* ---- Small phone (≤480px): tighter spacing, shorter video ---- */
+@media(max-width:480px){
+  .hero-inner{padding:2.5rem 5% 1.5rem;}
+  .hero-video{height:220px;}
+  .hero h1{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.15;}
+  .hero-desc{font-size:0.95rem;}
+  .hero-stats{padding:1rem;}
+  .hero-stats .sn{font-size:1.2rem;}
+}
+
+/* Safety: stamp out any legacy .hero-overlay <div> that might
+   still exist in the markup so it doesn't darken anything */
+.hero-overlay{display:none;}

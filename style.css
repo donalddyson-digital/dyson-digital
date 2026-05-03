@@ -1655,96 +1655,111 @@ footer{
 }
 
 
+
 /* =========================================================
-   HERO — SPLIT LAYOUT (homepage)
-   Desktop/tablet: text-left | video-right (2-col grid)
-   Mobile (≤768px): stacked — text on top, video below
-   No background-video, no overlays. Video is always visible.
+   HERO — SPLIT LAYOUT (homepage) — REFINED
+   Polished proportions, breathing room, premium video container
    ========================================================= */
 
-/* Base .hero override (was centered flex, now grid).
-   Keeps the existing radial gradient as a calm background. */
+/* ---- Container: 55% text / 45% video, generous padding ---- */
 .hero{
   min-height:auto;
   display:grid;
-  grid-template-columns:1.05fr 1fr;
-  gap:3rem;
+  grid-template-columns:1.15fr 1fr;
+  gap:4.5rem;
   align-items:center;
-  padding:5rem 5%;
+  padding:7rem 5%;
   text-align:left;
   border-bottom:1px solid var(--border);
-  /* base background gradient is inherited from earlier rule */
 }
 
-/* Text column */
+/* ---- Text column ---- */
 .hero-inner{
-  max-width:600px;
+  max-width:560px;
   position:relative;
   z-index:2;
 }
 
-/* Recenter+resize text-column elements that were originally
-   designed to be centered within a single-column layout */
-.hero-tag{margin-left:0;}
-.hero h1{
-  font-size:clamp(2rem,4.2vw,3.4rem);
-  margin-bottom:1.1rem;
-}
-.hero-desc{
-  margin-left:0;
-  margin-right:0;
-  max-width:540px;
-  text-shadow:none;
-  color:var(--muted);
-}
-.hero h1{color:var(--text);text-shadow:none;}
-.hero h1 span{
-  background:linear-gradient(135deg,var(--primary),var(--accent));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-.hero-trust{
-  margin-left:0;
-  background:rgba(255,255,255,0.05);
-  border-color:var(--border);
-  color:var(--text);
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
-}
+/* Vertical rhythm: explicit margins create premium breathing room */
 .hero-tag{
+  margin:0 0 1.75rem;
   background:rgba(255,255,255,0.04);
   border-color:var(--border);
   color:var(--muted);
   backdrop-filter:none;
   -webkit-backdrop-filter:none;
 }
-.hero-ctas{justify-content:flex-start;}
-.hero-stats{
-  background:rgba(255,255,255,0.02);
-  border-color:var(--border);
+.hero h1{
+  font-size:clamp(2rem,3.8vw,3.2rem);
+  line-height:1.05;
+  letter-spacing:-0.025em;
+  margin:0 0 1.75rem;
+  color:var(--text);
+  text-shadow:none;
+}
+.hero h1 span{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.hero-desc{
+  margin:0 0 1.75rem;
+  max-width:480px;       /* readable line length */
+  color:var(--muted);
+  font-size:1.05rem;
+  line-height:1.7;
+  text-shadow:none;
+}
+.hero-trust{
+  margin:0 0 2.5rem;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  color:var(--text);
   backdrop-filter:none;
   -webkit-backdrop-filter:none;
-  max-width:540px;
-  margin-left:0;
-  margin-right:0;
+}
+.hero-ctas{
+  margin:0 0 3rem;
+  justify-content:flex-start;
+}
+.hero-stats{
+  background:rgba(255,255,255,0.02);
+  border:1px solid var(--border);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  max-width:480px;
+  margin:0;
+  padding:1.25rem;
 }
 
-/* Video column container */
+/* ---- Video column: feature card ---- */
 .hero-media{
   position:relative;
   width:100%;
-  min-height:420px;
-  border-radius:18px;
+  aspect-ratio:16/9;          /* clean cinematic ratio */
+  border-radius:14px;
   overflow:hidden;
-  border:1px solid var(--border);
+  border:1px solid rgba(255,255,255,0.06);
   background:var(--card);
-  box-shadow:0 24px 60px -20px rgba(0,0,0,0.5);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.04) inset,
+    0 30px 60px -22px rgba(0,0,0,0.55),
+    0 8px 24px -10px rgba(0,0,0,0.35);
+  transition:transform 0.4s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s ease;
+}
+.hero-media:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.06) inset,
+    0 36px 70px -22px rgba(0,0,0,0.6),
+    0 10px 28px -10px rgba(0,0,0,0.4);
 }
 .hero-media .hero-video{
+  position:absolute;
+  inset:0;
   width:100%;
   height:100%;
-  min-height:420px;
   object-fit:cover;
   object-position:center;
   display:block;
@@ -1752,8 +1767,10 @@ footer{
   outline:none;
 }
 
-/* Reduced-motion: hide video, show calm gradient panel */
+/* Reduced-motion fallback */
 @media(prefers-reduced-motion:reduce){
+  .hero-media{transition:none;}
+  .hero-media:hover{transform:none;}
   .hero-media .hero-video{display:none;}
   .hero-media{
     background:
@@ -1763,62 +1780,80 @@ footer{
   }
 }
 
-/* ---- Tablet (769–1024px): tighter gap, slightly shorter video ---- */
-@media(min-width:769px) and (max-width:1024px){
+/* =========================================================
+   TABLET (769–1060px): tighter gap, balanced grid
+   ========================================================= */
+@media(min-width:769px) and (max-width:1060px){
   .hero{
-    grid-template-columns:1fr 1fr;
-    gap:2rem;
-    padding:4rem 5%;
+    grid-template-columns:1.1fr 1fr;
+    gap:2.5rem;
+    padding:5rem 5%;
   }
-  .hero-media,
-  .hero-media .hero-video{min-height:360px;}
-  .hero h1{font-size:clamp(1.9rem,4vw,2.6rem);}
+  .hero-inner{max-width:none;}
+  .hero h1{
+    font-size:clamp(1.8rem,3.6vw,2.4rem);
+    margin-bottom:1.5rem;
+  }
+  .hero-desc{
+    margin-bottom:1.5rem;
+    font-size:1rem;
+  }
+  .hero-trust{margin-bottom:2rem;}
+  .hero-ctas{margin-bottom:2.5rem;}
 }
 
 /* =========================================================
-   MOBILE (≤768px): stacked — text on top, video below
+   MOBILE (≤768px): stacked, recentered
    ========================================================= */
 @media(max-width:768px){
   .hero{
     grid-template-columns:1fr;
-    gap:2rem;
-    padding:3rem 5%;
+    gap:2.5rem;
+    padding:3.5rem 5%;
     text-align:center;
   }
   .hero-inner{
     max-width:600px;
     margin:0 auto;
   }
-  .hero h1{font-size:clamp(2rem,7vw,2.6rem);}
+  .hero-tag{margin:0 auto 1.5rem;}
+  .hero h1{
+    font-size:clamp(2rem,7vw,2.6rem);
+    margin-bottom:1.25rem;
+  }
   .hero-desc{
     margin:0 auto 1.5rem;
     max-width:none;
   }
-  .hero-stats{
-    margin-left:auto;
-    margin-right:auto;
+  .hero-trust{margin:0 auto 2rem;}
+  .hero-ctas{
+    margin:0 0 2.5rem;
+    justify-content:center;
   }
-  .hero-ctas{justify-content:center;}
-  .hero-media,
-  .hero-media .hero-video{
-    min-height:260px;
-    height:260px;
-  }
+  .hero-stats{margin:0 auto;max-width:none;}
   .hero-media{
     max-width:560px;
     margin:0 auto;
+    aspect-ratio:16/10;        /* slightly taller on mobile so it feels meaningful */
   }
 }
 
-/* ---- Small phone (≤480px): tighter spacing ---- */
+/* =========================================================
+   SMALL PHONE (≤480px): tighter spacing, compact rhythm
+   ========================================================= */
 @media(max-width:480px){
-  .hero{padding:2.5rem 5%;}
-  .hero h1{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.15;}
+  .hero{
+    padding:2.75rem 5%;
+    gap:2rem;
+  }
+  .hero h1{
+    font-size:clamp(1.8rem,8vw,2.3rem);
+    line-height:1.15;
+  }
   .hero-desc{font-size:0.95rem;}
-  .hero-media,
-  .hero-media .hero-video{min-height:220px;height:220px;}
   .hero-stats{padding:1rem;}
   .hero-stats .sn{font-size:1.2rem;}
+  .hero-media{aspect-ratio:16/10;}
 }
 
 /* Stamp out any legacy hero-overlay div if cached HTML loads it */

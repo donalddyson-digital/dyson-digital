@@ -1669,7 +1669,7 @@ footer{
 .hero{
   min-height:auto;
   display:grid;
-  grid-template-columns:1fr 1.2fr;
+  grid-template-columns:1fr 1.1fr;
   gap:5rem;
   align-items:center;
   padding:7.5rem 5%;
@@ -1740,8 +1740,7 @@ footer{
 .hero-media{
   position:relative;
   width:100%;
-  aspect-ratio:16/10;        /* matches video source closer → less crop */
-  min-height:400px;          /* safety floor: never feels small on desktop */
+  aspect-ratio:4/3;          /* taller ratio = more visual presence */
   border-radius:16px;
   overflow:hidden;
   border:1px solid rgba(255,255,255,0.06);
@@ -1785,11 +1784,11 @@ footer{
 }
 
 /* =========================================================
-   TABLET (769–1060px): wider video column, generous min-height
+   TABLET (769–1060px): tighter gap, balanced grid
    ========================================================= */
 @media(min-width:769px) and (max-width:1060px){
   .hero{
-    grid-template-columns:1fr 1.15fr;
+    grid-template-columns:1fr 1.05fr;
     gap:2.75rem;
     padding:5.5rem 5%;
   }
@@ -1805,10 +1804,7 @@ footer{
   }
   .hero-trust{margin-bottom:2.25rem;}
   .hero-ctas{margin-bottom:2.75rem;}
-  .hero-media{
-    aspect-ratio:16/10;        /* matches source video, no crop */
-    min-height:340px;          /* never gets squeezed on narrow tablets */
-  }
+  .hero-media{aspect-ratio:5/4;}   /* slightly less tall on tablet */
 }
 
 /* =========================================================

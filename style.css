@@ -1657,106 +1657,74 @@ footer{
 
 
 
+
 /* =========================================================
-   HERO — SPLIT LAYOUT (homepage) — REFINED v2
-   - Video gets MORE visual weight (true focal element)
-   - Cleaner vertical rhythm, generous breathing room
-   - Tighter typography
+   HERO — FULL VIDEO (homepage)
+   - Video IS the hero (messaging is baked into the video)
+   - Full-width, full-bleed
+   - CTAs sit below the video
+   - No overlays. Video stays bright.
+   - Headline preserved as .sr-only for SEO/a11y
    ========================================================= */
 
-/* Video gets the slightly larger column on desktop so it
-   anchors the section as the focal element. */
+/* Screen-reader-only class (SEO-friendly hidden H1) */
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+/* Hero shell */
 .hero{
-  min-height:auto;
-  display:grid;
-  grid-template-columns:1fr 1.1fr;
-  gap:5rem;
-  align-items:center;
-  padding:7.5rem 5%;
-  text-align:left;
-  border-bottom:1px solid var(--border);
-}
-
-/* ---- Text column ---- */
-.hero-inner{
-  max-width:540px;
+  display:block;
   position:relative;
-  z-index:2;
-}
-
-.hero-tag{
-  margin:0 0 1.75rem;
-  background:rgba(255,255,255,0.04);
-  border-color:var(--border);
-  color:var(--muted);
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
-}
-.hero h1{
-  font-size:clamp(2rem,3.6vw,3rem);
-  line-height:1.04;
-  letter-spacing:-0.025em;
-  margin:0 0 1.85rem;
-  color:var(--text);
-  text-shadow:none;
-}
-.hero h1 span{
-  background:linear-gradient(135deg,var(--primary),var(--accent));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-.hero-desc{
-  margin:0 0 2rem;
-  max-width:460px;
-  color:var(--muted);
-  font-size:1.05rem;
-  line-height:1.72;
-  text-shadow:none;
-}
-.hero-trust{
-  margin:0 0 2.5rem;
-  background:rgba(255,255,255,0.04);
-  border:1px solid var(--border);
-  color:var(--text);
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
-}
-.hero-ctas{
-  margin:0 0 3.25rem;
-  justify-content:flex-start;
-}
-.hero-stats{
-  background:rgba(255,255,255,0.02);
-  border:1px solid var(--border);
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
-  max-width:480px;
+  padding:0;
   margin:0;
-  padding:1.25rem;
+  min-height:auto;
+  text-align:center;
+  border-bottom:1px solid var(--border);
+  background:var(--dark);
 }
 
-/* ---- Video column: focal feature element ---- */
+/* Full-bleed video container */
 .hero-media{
   position:relative;
   width:100%;
-  aspect-ratio:4/3;          /* taller ratio = more visual presence */
-  border-radius:16px;
+  height:80vh;
+  max-height:780px;
+  min-height:420px;
   overflow:hidden;
-  border:1px solid rgba(255,255,255,0.06);
-  background:var(--card);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.04) inset,
-    0 36px 70px -22px rgba(0,0,0,0.6),
-    0 10px 30px -12px rgba(0,0,0,0.4);
-  transition:transform 0.45s cubic-bezier(0.22,1,0.36,1),box-shadow 0.45s ease;
+  border-radius:0;        /* full-bleed, no corners */
+  border:0;
+  box-shadow:none;
+  background:var(--dark);
 }
-.hero-media:hover{
-  transform:translateY(-4px);
-  box-shadow:
-    0 1px 0 rgba(255,255,255,0.06) inset,
-    0 42px 80px -22px rgba(0,0,0,0.65),
-    0 12px 34px -12px rgba(0,0,0,0.45);
+/* Soft blue brand-colored overlay (sits ABOVE video, BELOW UI) */
+.hero-media::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      rgba(10,20,40,0.55) 0%,
+      rgba(10,20,40,0.35) 30%,
+      rgba(10,20,40,0.18) 60%,
+      rgba(10,20,40,0.05) 100%),
+    linear-gradient(180deg,
+      rgba(10,20,40,0.10) 0%,
+      transparent 35%,
+      rgba(10,20,40,0.20) 100%),
+    radial-gradient(circle at 80% 50%,
+      rgba(79,142,247,0.08),
+      transparent 55%);
 }
 .hero-media .hero-video{
   position:absolute;
@@ -1764,102 +1732,89 @@ footer{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center;
+  object-position:center center;
   display:block;
   border:0;
   outline:none;
+  filter:brightness(0.95) contrast(1.05);   /* keep video bright + a touch crisper */
+  z-index:0;
 }
 
 /* Reduced-motion fallback */
 @media(prefers-reduced-motion:reduce){
-  .hero-media{transition:none;}
-  .hero-media:hover{transform:none;}
   .hero-media .hero-video{display:none;}
   .hero-media{
     background:
       radial-gradient(circle at 30% 30%,rgba(79,142,247,0.18),transparent 55%),
       radial-gradient(circle at 70% 70%,rgba(124,92,252,0.14),transparent 55%),
-      var(--card);
+      var(--dark);
   }
 }
 
-/* =========================================================
-   TABLET (769–1060px): tighter gap, balanced grid
-   ========================================================= */
+/* CTAs below the video */
+.hero .hero-ctas{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin:0;
+  padding:3rem 5%;
+  background:var(--dark);
+}
+
+/* ---- Tablet (769–1060px) ---- */
 @media(min-width:769px) and (max-width:1060px){
-  .hero{
-    grid-template-columns:1fr 1.05fr;
-    gap:2.75rem;
-    padding:5.5rem 5%;
-  }
-  .hero-inner{max-width:none;}
-  .hero h1{
-    font-size:clamp(1.8rem,3.4vw,2.3rem);
-    margin-bottom:1.5rem;
-  }
-  .hero-desc{
-    margin-bottom:1.75rem;
-    font-size:1rem;
-    max-width:none;
-  }
-  .hero-trust{margin-bottom:2.25rem;}
-  .hero-ctas{margin-bottom:2.75rem;}
-  .hero-media{aspect-ratio:5/4;}   /* slightly less tall on tablet */
-}
-
-/* =========================================================
-   MOBILE (≤768px): stacked, recentered
-   ========================================================= */
-@media(max-width:768px){
-  .hero{
-    grid-template-columns:1fr;
-    gap:2.75rem;
-    padding:3.75rem 5%;
-    text-align:center;
-  }
-  .hero-inner{
-    max-width:600px;
-    margin:0 auto;
-  }
-  .hero-tag{margin:0 auto 1.5rem;}
-  .hero h1{
-    font-size:clamp(2rem,7vw,2.6rem);
-    margin-bottom:1.25rem;
-  }
-  .hero-desc{
-    margin:0 auto 1.5rem;
-    max-width:none;
-  }
-  .hero-trust{margin:0 auto 2rem;}
-  .hero-ctas{
-    margin:0 0 2.5rem;
-    justify-content:center;
-  }
-  .hero-stats{margin:0 auto;max-width:none;}
   .hero-media{
-    max-width:560px;
-    margin:0 auto;
-    aspect-ratio:16/10;
+    height:72vh;
+    max-height:640px;
+    min-height:380px;
+  }
+  .hero .hero-ctas{padding:2.5rem 5%;}
+}
+
+/* ---- Mobile (≤768px) ---- */
+@media(max-width:768px){
+  .hero-media{
+    height:65vh;
+    max-height:560px;
+    min-height:340px;
+  }
+  /* Lighter overlay on mobile — keep video maximally visible */
+  .hero-media::before{
+    background:
+      linear-gradient(90deg,
+        rgba(10,20,40,0.30) 0%,
+        rgba(10,20,40,0.18) 40%,
+        rgba(10,20,40,0.08) 70%,
+        rgba(10,20,40,0.02) 100%),
+      linear-gradient(180deg,
+        rgba(10,20,40,0.05) 0%,
+        transparent 40%,
+        rgba(10,20,40,0.12) 100%);
+  }
+  .hero .hero-ctas{
+    padding:2rem 5%;
+    gap:10px;
   }
 }
 
-/* =========================================================
-   SMALL PHONE (≤480px): compact rhythm
-   ========================================================= */
+/* ---- Small phone (≤480px) ---- */
 @media(max-width:480px){
-  .hero{
-    padding:2.75rem 5%;
-    gap:2.25rem;
+  .hero-media{
+    height:62vh;
+    max-height:520px;
+    min-height:300px;
   }
-  .hero h1{
-    font-size:clamp(1.8rem,8vw,2.3rem);
-    line-height:1.15;
+  .hero .hero-ctas{
+    padding:1.75rem 5%;
+    flex-direction:column;
   }
-  .hero-desc{font-size:0.95rem;}
-  .hero-stats{padding:1rem;}
-  .hero-stats .sn{font-size:1.2rem;}
-  .hero-media{aspect-ratio:16/10;}
+  .hero .hero-ctas .btn{width:100%;justify-content:center;}
 }
 
 /* Stamp out any legacy hero-overlay div if cached HTML loads it */
 .hero-overlay{display:none;}
+
+/* Generic button-row utility (inline-style replacement) */
+.btn-row{display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;}
